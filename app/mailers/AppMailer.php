@@ -6,7 +6,7 @@ use Illuminate\Contracts\Mail\Mailer;
 
 class AppMailer {
     protected $mailer; 
-    protected $fromAddress = 'patelutkarsh341@gmail.com';
+    protected $fromAddress = 'utkarsh.patel2507@gmail.com';
     protected $fromName = 'Support Ticket';
     protected $to;
     protected $subject;
