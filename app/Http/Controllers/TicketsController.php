@@ -14,12 +14,13 @@ use App\mailers\AppMailer;
 class TicketsController extends Controller
 {
     
-public function __construct()
-{
+    public function __construct()
+    {
     $this->middleware('auth');
-}
+    }
+
     public function close($ticket_id, AppMailer $mailer)
-{
+    {
     $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
 
     $ticket->status = 'Closed';
@@ -31,23 +32,27 @@ public function __construct()
     $mailer->sendTicketStatusNotification($ticketOwner, $ticket);
 
     return redirect()->back()->with("status", "The ticket has been closed.");
-}
+    }
+
     public function index()
-{
+    {
     $tickets = Ticket::paginate(10);
+    
     $categories = Category::all();
 
     return view('tickets.index', compact('tickets', 'categories'));
-}
+    }
+
     public function create()
     {
     $categories = Category::all();
 
     return view('tickets.create', compact('categories'));
-   }
+    }
 
     public function store(Request $request, AppMailer $mailer)
     {
+
     $this->validate($request, [
             'title'     => 'required',
             'category'  => 'required',
@@ -71,19 +76,21 @@ public function __construct()
         $mailer->sendTicketInformation(Auth::user(), $ticket);
 
         return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened.");
-}
+    }
 
-public function userTickets()
-{
+    public function userTickets()
+    {
+
     $tickets = Ticket::where('user_id', Auth::user()->id)->paginate(10);
+
     $categories = Category::all();
 
     return view('tickets.user_tickets', compact('tickets', 'categories'));
-}
+    }
 
-public function show($ticket_id)
-{
-    
+    public function show($ticket_id)
+    {
+
     $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
 
     $comments = $ticket->comments;

@@ -34,8 +34,6 @@
                             <div class="col-md-6">
                                 <select id="category" type="category" class="form-control" name="category">
                                     <option value="">Select Category</option>
-                                    <option value="1">Technical</option>
-                                    <option value="2">Sales</option>
                                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
                                     @endforeach
