@@ -18,7 +18,7 @@ class TicketsController extends Controller
     {
     $this->middleware('auth');
     }
-
+////////
     public function close($ticket_id, AppMailer $mailer)
     {
     $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
@@ -33,7 +33,7 @@ class TicketsController extends Controller
 
     return redirect()->back()->with("status", "The ticket has been closed.");
     }
-
+///////
     public function index()
     {
     $tickets = Ticket::paginate(10);
@@ -42,17 +42,16 @@ class TicketsController extends Controller
 
     return view('tickets.index', compact('tickets', 'categories'));
     }
-
+///////
     public function create()
     {
     $categories = Category::all();
 
     return view('tickets.create', compact('categories'));
     }
-
+///////
     public function store(Request $request, AppMailer $mailer)
     {
-
     $this->validate($request, [
             'title'     => 'required',
             'category'  => 'required',
@@ -77,6 +76,7 @@ class TicketsController extends Controller
 
         return redirect()->back()->with("status", "A ticket with ID: #$ticket->ticket_id has been opened.");
     }
+///////
 
     public function userTickets()
     {
@@ -87,10 +87,9 @@ class TicketsController extends Controller
 
     return view('tickets.user_tickets', compact('tickets', 'categories'));
     }
-
+///////
     public function show($ticket_id)
     {
-
     $ticket = Ticket::where('ticket_id', $ticket_id)->firstOrFail();
 
     $comments = $ticket->comments;

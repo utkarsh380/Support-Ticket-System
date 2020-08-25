@@ -1,5 +1,5 @@
 <?php
-namespace App\Mailers;
+namespace App\mailers;
 
 use App\Ticket;
 use Illuminate\Contracts\Mail\Mailer;
